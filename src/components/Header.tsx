@@ -29,8 +29,12 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Brand & Tagline */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold text-xl">
-            ⚡
+          <div className="w-11 h-11 rounded-xl overflow-hidden border border-cyan-400/50 shadow-lg shadow-cyan-500/20 shrink-0 bg-slate-950">
+            <img
+              src="/assets/aistudio/file_0000000059908211977ff765841869b6_d37bf98c.png"
+              alt="AI Software Maker"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <div className="flex items-center gap-2">

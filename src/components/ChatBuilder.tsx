@@ -3,7 +3,7 @@ import { CustomSoftware, IndianLanguage, PlatformType, ChatMessage } from '../ty
 import { getTranslation } from '../i18n';
 import { DeviceEmulator } from './DeviceEmulator';
 import { 
-  Check, 
+  ArrowUp,
   Send, 
   Sparkles, 
   Download, 
@@ -12,10 +12,7 @@ import {
   Smartphone, 
   Monitor, 
   Sliders, 
-  CheckSquare, 
-  RotateCcw,
-  Zap,
-  ArrowRight
+  Zap
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { downloadSoftwareZip } from '../services/zipGenerator';
@@ -56,7 +53,7 @@ export const ChatBuilder: React.FC<ChatBuilderProps> = ({
     {
       id: 'welcome',
       sender: 'ai',
-      text: `${t('tagline')}! Jio Keypad Phone, Smart Phone ya PC ke liye apna idea box me likhein aur tic box (✓) dabayein.`,
+      text: `${t('tagline')}! Jio Keypad Phone, Smart Phone ya PC ke liye apna idea box me likhein aur right side me neeche upar ki taraf wale arrow (↑) ko dabayein.`,
       timestamp: Date.now(),
     }
   ]);
@@ -276,17 +273,16 @@ export const ChatBuilder: React.FC<ChatBuilderProps> = ({
             </div>
           </div>
 
-          {/* The Specific Box with Tic Box requested by user:
-              "char me ek baox rahe useeme tic box bhi rahe chota aur us box me idea type karke tic box par dabanepar ai ke madat se software banba shru ho jaye" */}
+          {/* Writing box with upward arrow button at bottom-right */}
           <div className="relative rounded-2xl bg-slate-950 border-2 border-slate-700/80 focus-within:border-cyan-500 transition-all p-3 shadow-inner">
-            <div className="flex items-start gap-3">
+            <div className="flex items-end gap-3">
               <textarea
                 value={ideaText}
                 onChange={(e) => setIdeaText(e.target.value)}
                 placeholder={t('typeIdeaPlaceholder')}
                 rows={3}
                 disabled={isGenerating}
-                className="w-full bg-transparent text-slate-100 placeholder-slate-500 text-sm focus:outline-none resize-none leading-relaxed"
+                className="w-full bg-transparent text-slate-100 placeholder-slate-500 text-sm focus:outline-none resize-none leading-relaxed pb-1"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                     handleStartGeneration();
@@ -294,24 +290,22 @@ export const ChatBuilder: React.FC<ChatBuilderProps> = ({
                 }}
               />
 
-              {/* The "Tic Box" (Small checkmark button inside the box) */}
-              <div className="flex flex-col items-center gap-1 shrink-0">
+              {/* Bottom-Right Upward Arrow Button */}
+              <div className="flex flex-col items-center shrink-0 self-end">
                 <button
                   type="button"
                   onClick={handleStartGeneration}
                   disabled={!ideaText.trim() || isGenerating}
                   title={t('ticBoxTooltip')}
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold transition-all shadow-lg ${
+                  aria-label="Create Software"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all shadow-lg ${
                     ideaText.trim()
-                      ? 'bg-gradient-to-br from-emerald-400 to-green-600 hover:scale-105 active:scale-95 text-slate-950 shadow-emerald-500/30 ring-2 ring-emerald-400/50 cursor-pointer animate-pulse'
-                      : 'bg-slate-800 text-slate-600 border border-slate-700 cursor-not-allowed'
+                      ? 'bg-gradient-to-t from-blue-600 via-cyan-500 to-emerald-400 hover:scale-105 active:scale-95 text-slate-950 shadow-cyan-500/30 ring-2 ring-cyan-400/50 cursor-pointer'
+                      : 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
                   }`}
                 >
-                  <Check className="w-6 h-6 stroke-[3.5]" />
+                  <ArrowUp className="w-5 h-5 stroke-[3]" />
                 </button>
-                <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-tighter">
-                  Tic Box ✓
-                </span>
               </div>
             </div>
 
@@ -319,7 +313,7 @@ export const ChatBuilder: React.FC<ChatBuilderProps> = ({
             <div className="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                <span>Idea type karke <strong>Tic Box (✓)</strong> dabayein</span>
+                <span>Idea type karke right side neeche <strong>Arrow (↑)</strong> dabayein</span>
               </div>
               <span className="text-slate-500 hidden sm:inline">Ctrl + Enter to trigger</span>
             </div>
@@ -528,8 +522,17 @@ export const ChatBuilder: React.FC<ChatBuilderProps> = ({
         </form>
       </div>
 
-      {/* RIGHT COLUMN: Live Interactive Virtual Device Emulator */}
-      <div className="lg:col-span-5 flex flex-col items-center">
+      {/* RIGHT COLUMN: App Poster Image + Live Interactive Virtual Device Emulator */}
+      <div className="lg:col-span-5 flex flex-col items-center space-y-5">
+        {/* App Featured Poster Image */}
+        <div className="w-full rounded-2xl overflow-hidden border border-cyan-500/30 shadow-xl shadow-cyan-500/10 bg-slate-900">
+          <img
+            src="/assets/aistudio/file_0000000059908211977ff765841869b6_d37bf98c.png"
+            alt="AI Software Maker - Sirf Likho Software Banao"
+            className="w-full h-auto object-cover block"
+          />
+        </div>
+
         <div className="sticky top-20 w-full">
           <DeviceEmulator
             software={latestSoftware}

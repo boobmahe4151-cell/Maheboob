@@ -141,7 +141,7 @@ export const MySoftware: React.FC<MySoftwareProps> = ({
             {softwares.length === 0 ? t('noSoftwaresYet') : 'Koi software match nahi hua'}
           </h3>
           <p className="text-xs text-slate-500 max-w-md mx-auto">
-            Chat option me jakar apna software idea likhein aur tick box (✓) dabakar naya software banayein.
+            Chat option me jakar apna software idea likhein aur upar wale arrow (↑) par dabakar naya software banayein.
           </p>
           <button
             onClick={onNavigateToChat}
